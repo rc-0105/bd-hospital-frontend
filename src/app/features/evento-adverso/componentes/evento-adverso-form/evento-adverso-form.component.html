@@ -1,0 +1,68 @@
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">{{ isEdit ? 'Editar' : 'Nuevo' }} Evento Adverso</h3>
+    </div>
+    
+    <div class="card-body">
+      <form (ngSubmit)="guardar()">
+        <div class="row g-3">
+          <div class="col-md-4">
+            <label class="form-label">Tipo de Evento</label>
+            <select [(ngModel)]="evento.tipo_evento" name="tipo_evento" class="form-select" required>
+              <option *ngFor="let tipo of tiposEvento" [value]="tipo">{{ tipo | titlecase }}</option>
+            </select>
+          </div>
+          
+          <div class="col-md-4">
+            <label class="form-label">Gravedad</label>
+            <select [(ngModel)]="evento.gravedad" name="gravedad" class="form-select" required>
+              <option *ngFor="let g of gravedades" [value]="g">{{ g | titlecase }}</option>
+            </select>
+          </div>
+          
+          <div class="col-md-4">
+            <label class="form-label">Estado</label>
+            <select [(ngModel)]="evento.estado" name="estado" class="form-select" required>
+              <option *ngFor="let e of estados" [value]="e">{{ e | replaceUnderscore }}</option>
+            </select>
+          </div>
+          
+          <div class="col-md-6">
+            <label class="form-label">Fecha y Hora</label>
+            <input type="datetime-local" [(ngModel)]="evento.fecha_hora_evento" 
+                   name="fecha_hora_evento" class="form-control" required>
+          </div>
+          
+          <div class="col-md-6">
+            <label class="form-label">ID Paciente</label>
+            <input type="number" [(ngModel)]="evento.id_paciente" 
+                   name="id_paciente" class="form-control" required min="1">
+          </div>
+          
+          <div class="col-12">
+            <label class="form-label">Ubicación</label>
+            <input type="text" [(ngModel)]="evento.ubicacion" 
+                   name="ubicacion" class="form-control" required>
+          </div>
+          
+          <div class="col-12">
+            <label class="form-label">Acciones Tomadas</label>
+            <textarea [(ngModel)]="evento.acciones_tomadas" 
+                     name="acciones_tomadas" class="form-control" rows="4" required></textarea>
+          </div>
+        </div>
+
+        <div class="mt-4 d-flex justify-content-end gap-2">
+          <button type="button" (click)="cancelar()" 
+                  class="btn btn-secondary">
+            <i class="bi bi-x-circle me-2"></i>Cancelar
+          </button>
+          <button type="submit" class="btn btn-primary">
+            <i class="bi bi-save me-2"></i>{{ isEdit ? 'Actualizar' : 'Guardar' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

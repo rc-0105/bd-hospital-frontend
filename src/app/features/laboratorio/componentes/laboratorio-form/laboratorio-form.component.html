@@ -1,0 +1,54 @@
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">{{ isEdit ? 'Editar' : 'Nuevo' }} Examen de Laboratorio</h3>
+    </div>
+    
+    <div class="card-body">
+      <form (ngSubmit)="guardar()">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Tipo de Examen</label>
+            <select [(ngModel)]="examen.tipo_examen" name="tipo_examen" class="form-select" required>
+              <option *ngFor="let tipo of tiposExamen" [value]="tipo">{{ tipo | titlecase }}</option>
+            </select>
+          </div>
+          
+          <div class="col-md-6">
+            <label class="form-label">ID Consulta</label>
+            <input type="number" [(ngModel)]="examen.id_consulta" 
+                   name="id_consulta" class="form-control" required min="1">
+          </div>
+          
+          <div class="col-md-6">
+            <label class="form-label">Fecha y Hora de Solicitud</label>
+            <input type="datetime-local" [(ngModel)]="examen.fecha_hora_solicitud" 
+                   name="fecha_hora_solicitud" class="form-control" required>
+          </div>
+          
+          <div class="col-12">
+            <label class="form-label">Resultado</label>
+            <textarea [(ngModel)]="examen.resultado" 
+                     name="resultado" class="form-control" rows="3" required></textarea>
+          </div>
+          
+          <div class="col-12">
+            <label class="form-label">Observaciones</label>
+            <textarea [(ngModel)]="examen.observaciones" 
+                     name="observaciones" class="form-control" rows="3"></textarea>
+          </div>
+        </div>
+
+        <div class="mt-4 d-flex justify-content-end gap-2">
+          <button type="button" (click)="cancelar()" 
+                  class="btn btn-secondary">
+            <i class="bi bi-x-circle me-2"></i>Cancelar
+          </button>
+          <button type="submit" class="btn btn-primary">
+            <i class="bi bi-save me-2"></i>{{ isEdit ? 'Actualizar' : 'Guardar' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

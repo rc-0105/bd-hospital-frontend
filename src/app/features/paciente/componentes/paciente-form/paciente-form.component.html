@@ -1,0 +1,68 @@
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">{{ isEdit ? 'Editar' : 'Nuevo' }} Paciente</h3>
+    </div>
+    
+    <div class="card-body">
+      <form (ngSubmit)="guardar()">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Nombre</label>
+            <input type="text" [(ngModel)]="paciente.nombre" name="nombre"
+                   class="form-control" required>
+          </div>
+          
+          <div class="col-md-6">
+            <label class="form-label">Apellido</label>
+            <input type="text" [(ngModel)]="paciente.apellido" name="apellido"
+                   class="form-control" required>
+          </div>
+          
+          <div class="col-md-6">
+            <label class="form-label">Fecha Nacimiento</label>
+            <input type="date" [(ngModel)]="paciente.fecha_nacimiento" 
+                   name="fecha_nacimiento" class="form-control" required>
+          </div>
+          
+          <div class="col-md-6">
+            <label class="form-label">Sexo</label>
+            <select [(ngModel)]="paciente.sexo" name="sexo" class="form-select" required>
+              <option value="">Seleccione...</option>
+              <option value="M">Masculino</option>
+              <option value="F">Femenino</option>
+            </select>
+          </div>
+          
+          <div class="col-12">
+            <label class="form-label">Dirección</label>
+            <input type="text" [(ngModel)]="paciente.direccion" name="direccion"
+                   class="form-control">
+          </div>
+          
+          <div class="col-md-6">
+            <label class="form-label">Teléfono</label>
+            <input type="tel" [(ngModel)]="paciente.telefono" name="telefono"
+                   class="form-control">
+          </div>
+          
+          <div class="col-md-6">
+            <label class="form-label">ID Seguro</label>
+            <input type="number" [(ngModel)]="paciente.id_seguro" name="id_seguro"
+                   class="form-control">
+          </div>
+        </div>
+
+        <div class="mt-4 d-flex justify-content-end gap-2">
+          <button type="button" (click)="cancelar()" 
+                  class="btn btn-secondary">
+            <i class="bi bi-x-circle me-2"></i>Cancelar
+          </button>
+          <button type="submit" class="btn btn-primary">
+            <i class="bi bi-save me-2"></i>{{ isEdit ? 'Actualizar' : 'Guardar' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

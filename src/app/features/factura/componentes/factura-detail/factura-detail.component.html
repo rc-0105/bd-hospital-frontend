@@ -1,0 +1,52 @@
+<p>factura-detail works!</p>
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">Detalle de Factura #{{ factura?.id_factura }}</h3>
+    </div>
+    
+    <div class="card-body" *ngIf="factura">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <strong>Fecha Emisión:</strong> {{ factura.fecha_hora_emision | date:'medium' }}
+            </li>
+            <li class="list-group-item">
+              <strong>ID Paciente:</strong> {{ factura.id_paciente }}
+            </li>
+            <li class="list-group-item">
+              <strong>Método Pago:</strong> {{ factura.metodo_pago | titlecase }}
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <strong>Estado:</strong> 
+              <span [class]="'badge bg-' + getEstadoClass(factura.estado)">
+                {{ factura.estado | replaceUnderscore }}
+              </span>
+            </li>
+            <li class="list-group-item">
+              <strong>Total:</strong> {{ factura.total | currency }}
+            </li>
+            <li class="list-group-item">
+              <strong>ID Tipo:</strong> {{ factura.id_tipo }}
+            </li>
+            <li class="list-group-item">
+              <strong>ID Concepto:</strong> {{ factura.id_concepto }}
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-4 d-flex justify-content-end">
+        <a routerLink="/factura" class="btn btn-outline-primary">
+          <i class="bi bi-arrow-left me-2"></i>Volver al Listado
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

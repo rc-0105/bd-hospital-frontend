@@ -1,0 +1,54 @@
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">Detalle del Evento Adverso</h3>
+    </div>
+    
+    <div class="card-body" *ngIf="evento">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <strong>Fecha/Hora:</strong> {{ evento.fecha_hora_evento | date:'medium' }}
+            </li>
+            <li class="list-group-item">
+              <strong>Tipo:</strong> {{ evento.tipo_evento | titlecase }}
+            </li>
+            <li class="list-group-item">
+              <strong>Gravedad:</strong> 
+              <span [class]="'badge bg-' + getGravedadClass(evento.gravedad)">
+                {{ evento.gravedad | titlecase }}
+              </span>
+            </li>
+            <li class="list-group-item">
+              <strong>Estado:</strong> {{ evento.estado | replaceUnderscore }}
+            </li>
+            <li class="list-group-item">
+              <strong>ID Paciente:</strong> {{ evento.id_paciente }}
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <strong>Ubicación:</strong> {{ evento.ubicacion }}
+            </li>
+            <li class="list-group-item">
+              <strong>Acciones Tomadas:</strong>
+              <div class="card card-body bg-light mt-2">
+                {{ evento.acciones_tomadas }}
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-4 d-flex justify-content-end">
+        <a routerLink="/evento-adverso" class="btn btn-outline-primary">
+          <i class="bi bi-arrow-left me-2"></i>Volver al Listado
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

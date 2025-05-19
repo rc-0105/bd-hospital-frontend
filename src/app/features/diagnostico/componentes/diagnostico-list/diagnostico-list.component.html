@@ -1,0 +1,62 @@
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+      <h3 class="mb-0">Registro de Diagnósticos</h3>
+      <a routerLink="nuevo" class="btn btn-light">
+        <i class="bi bi-plus-circle me-2"></i>Nuevo Diagnóstico
+      </a>
+    </div>
+
+    <div class="card-body">
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <div class="input-group">
+            <input type="text" [(ngModel)]="searchText" 
+                   class="form-control" placeholder="Buscar diagnósticos...">
+            <button class="btn btn-outline-secondary" disabled>
+              <i class="bi bi-search"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover table-striped">
+          <thead class="table-dark">
+            <tr>
+              <th>ID</th>
+              <th>Diagnóstico Ingreso</th>
+              <th>Diagnóstico Egreso</th>
+              <th>ID Paciente</th>
+              <th class="text-end">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let d of diagnosticos">
+              <td>{{ d.id_diagnostico }}</td>
+              <td>{{ d.diagnostico_ingreso | truncate:30 }}</td>
+              <td>{{ d.diagnostico_egreso | truncate:30 }}</td>
+              <td>{{ d.id_paciente }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/diagnostico/editar', d.id_diagnostico]" 
+                     class="btn btn-sm btn-warning">
+                    <i class="bi bi-pencil-square"></i>
+                  </a>
+                  <a [routerLink]="['/diagnostico', d.id_diagnostico]" 
+                     class="btn btn-sm btn-info">
+                    <i class="bi bi-eye"></i>
+                  </a>
+                  <button (click)="eliminarDiagnostico(d.id_diagnostico)" 
+                          class="btn btn-sm btn-danger">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">Detalle de Examen de Laboratorio</h3>
+    </div>
+    
+    <div class="card-body" *ngIf="examen">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <strong>Tipo de Examen:</strong> {{ examen.tipo_examen | titlecase }}
+            </li>
+            <li class="list-group-item">
+              <strong>Fecha Solicitud:</strong> {{ examen.fecha_hora_solicitud | date:'medium' }}
+            </li>
+            <li class="list-group-item">
+              <strong>ID Consulta:</strong> {{ examen.id_consulta }}
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <strong>Resultado:</strong>
+              <span [class]="'badge bg-' + getResultadoClass(examen.resultado)">
+                {{ examen.resultado ? 'Completado' : 'Pendiente' }}
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-12" *ngIf="examen.resultado">
+          <h5>Resultado Completo</h5>
+          <div class="card card-body bg-light">
+            {{ examen.resultado }}
+          </div>
+        </div>
+
+        <div class="col-12" *ngIf="examen.observaciones">
+          <h5>Observaciones</h5>
+          <div class="card card-body bg-light">
+            {{ examen.observaciones }}
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-4 d-flex justify-content-end">
+        <a routerLink="/laboratorio" class="btn btn-outline-primary">
+          <i class="bi bi-arrow-left me-2"></i>Volver al Listado
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

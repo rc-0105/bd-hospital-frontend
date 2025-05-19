@@ -1,0 +1,47 @@
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">{{ isEdit ? 'Editar' : 'Nuevo' }} Seguro de Salud</h3>
+    </div>
+    
+    <div class="card-body">
+      <form (ngSubmit)="guardar()">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Nombre</label>
+            <input type="text" [(ngModel)]="seguro.nombre" 
+                   name="nombre" class="form-control" required>
+          </div>
+          
+          <div class="col-md-6">
+            <label class="form-label">Tipo</label>
+            <input type="text" [(ngModel)]="seguro.tipo" 
+                   name="tipo" class="form-control" required>
+          </div>
+          
+          <div class="col-12">
+            <label class="form-label">Cobertura</label>
+            <textarea [(ngModel)]="seguro.cobertura" 
+                     name="cobertura" class="form-control" rows="3" required></textarea>
+          </div>
+          
+          <div class="col-md-6">
+            <label class="form-label">Contacto</label>
+            <input type="text" [(ngModel)]="seguro.contacto" 
+                   name="contacto" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="mt-4 d-flex justify-content-end gap-2">
+          <button type="button" (click)="cancelar()" 
+                  class="btn btn-secondary">
+            <i class="bi bi-x-circle me-2"></i>Cancelar
+          </button>
+          <button type="submit" class="btn btn-primary">
+            <i class="bi bi-save me-2"></i>{{ isEdit ? 'Actualizar' : 'Guardar' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

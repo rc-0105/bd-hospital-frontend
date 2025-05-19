@@ -1,0 +1,149 @@
+<div class="sidebar" [class.active]="isOpen">
+  <div class="sidebar-header">
+    <h5><i class="bi bi-menu-button-wide me-2"></i> Menú Completo</h5>
+  </div>
+  
+  <div class="sidebar-content">
+    <!-- Grupo 1: Gestión Médica -->
+    <div class="sidebar-group">
+      <div class="group-header" (click)="toggleGroup('medica')">
+        <i class="bi bi-heart-pulse me-2"></i> Gestión Médica
+        <i class="bi bi-chevron-{{groups['medica'] ? 'down' : 'right'}} float-end"></i>
+      </div>
+      <div class="group-items" [class.show]="groups['medica']">
+        <a class="sidebar-item" routerLink="/pacientes" routerLinkActive="active">
+          <i class="bi bi-people-fill me-2"></i> Pacientes
+        </a>
+        <a class="sidebar-item" routerLink="/medicos" routerLinkActive="active">
+          <i class="bi bi-heart-pulse me-2"></i> Médicos
+        </a>
+        <a class="sidebar-item" routerLink="/historia-clinica" routerLinkActive="active">
+          <i class="bi bi-clipboard2-pulse me-2"></i> Historias Clínicas
+        </a>
+        <a class="sidebar-item" routerLink="/diagnostico" routerLinkActive="active">
+          <i class="bi bi-file-medical me-2"></i> Diagnósticos
+        </a>
+        <a class="sidebar-item" routerLink="/antecedente" routerLinkActive="active">
+          <i class="bi bi-file-text me-2"></i> Antecedentes
+        </a>
+        <a class="sidebar-item" routerLink="/alergia" routerLinkActive="active">
+          <i class="bi bi-exclamation-triangle me-2"></i> Alergias
+        </a>
+      </div>
+    </div>
+
+    <!-- Grupo 2: Servicios Clínicos -->
+    <div class="sidebar-group">
+      <div class="group-header" (click)="toggleGroup('servicios')">
+        <i class="bi bi-hospital me-2"></i> Servicios Clínicos
+        <i class="bi bi-chevron-{{groups['servicios'] ? 'down' : 'right'}} float-end"></i>
+      </div>
+      <div class="group-items" [class.show]="groups['servicios']">
+        <a class="sidebar-item" routerLink="/laboratorio" routerLinkActive="active">
+          <i class="bi bi-droplet me-2"></i> Laboratorio
+        </a>
+        <a class="sidebar-item" routerLink="/prescripcion" routerLinkActive="active">
+          <i class="bi bi-prescription me-2"></i> Prescripciones
+        </a>
+        <a class="sidebar-item" routerLink="/equipo-medico" routerLinkActive="active">
+          <i class="bi bi-tools me-2"></i> Equipo Médico
+        </a>
+        <a class="sidebar-item" routerLink="/habitacion" routerLinkActive="active">
+          <i class="bi bi-door-closed me-2"></i> Habitaciones
+        </a>
+      </div>
+    </div>
+
+    <!-- Grupo 3: Administración -->
+    <div class="sidebar-group">
+      <div class="group-header" (click)="toggleGroup('admin')">
+        <i class="bi bi-gear me-2"></i> Administración
+        <i class="bi bi-chevron-{{groups['admin'] ? 'down' : 'right'}} float-end"></i>
+      </div>
+      <div class="group-items" [class.show]="groups['admin']">
+        <a class="sidebar-item" routerLink="/empleados" routerLinkActive="active">
+          <i class="bi bi-person-badge me-2"></i> Empleados
+        </a>
+        <a class="sidebar-item" routerLink="/jornada-laboral" routerLinkActive="active">
+          <i class="bi bi-clock-history me-2"></i> Jornadas Laborales
+        </a>
+        <a class="sidebar-item" routerLink="/programa" routerLinkActive="active">
+          <i class="bi bi-calendar-event me-2"></i> Programas
+        </a>
+      </div>
+    </div>
+
+    <!-- Grupo 4: Facturación -->
+    <div class="sidebar-group">
+      <div class="group-header" (click)="toggleGroup('facturacion')">
+        <i class="bi bi-cash-coin me-2"></i> Facturación
+        <i class="bi bi-chevron-{{groups['facturacion'] ? 'down' : 'right'}} float-end"></i>
+      </div>
+      <div class="group-items" [class.show]="groups['facturacion']">
+        <a class="sidebar-item" routerLink="/factura" routerLinkActive="active">
+          <i class="bi bi-receipt me-2"></i> Facturas
+        </a>
+        <a class="sidebar-item" routerLink="/tipo-factura" routerLinkActive="active">
+          <i class="bi bi-receipt-cutoff me-2"></i> Tipos de Factura
+        </a>
+        <a class="sidebar-item" routerLink="/concepto-factura" routerLinkActive="active">
+          <i class="bi bi-list-check me-2"></i> Conceptos
+        </a>
+      </div>
+    </div>
+
+    <!-- Grupo 5: Seguros -->
+    <div class="sidebar-group">
+      <div class="group-header" (click)="toggleGroup('seguros')">
+        <i class="bi bi-shield-check me-2"></i> Seguros
+        <i class="bi bi-chevron-{{groups['seguros'] ? 'down' : 'right'}} float-end"></i>
+      </div>
+      <div class="group-items" [class.show]="groups['seguros']">
+        <a class="sidebar-item" routerLink="/seguro-salud" routerLinkActive="active">
+          <i class="bi bi-shield-plus me-2"></i> Seguros de Salud
+        </a>
+        <a class="sidebar-item" routerLink="/poliza" routerLinkActive="active">
+          <i class="bi bi-file-earmark-text me-2"></i> Pólizas
+        </a>
+      </div>
+    </div>
+
+    <!-- Grupo 6: Reclamos -->
+    <div class="sidebar-group">
+      <div class="group-header" (click)="toggleGroup('reclamos')">
+        <i class="bi bi-exclamation-octagon me-2"></i> Reclamos
+        <i class="bi bi-chevron-{{groups['reclamos'] ? 'down' : 'right'}} float-end"></i>
+      </div>
+      <div class="group-items" [class.show]="groups['reclamos']">
+        <a class="sidebar-item" routerLink="/reclamo" routerLinkActive="active">
+          <i class="bi bi-chat-left-text me-2"></i> Reclamos
+        </a>
+        <a class="sidebar-item" routerLink="/tipo-reclamo" routerLinkActive="active">
+          <i class="bi bi-tags me-2"></i> Tipos de Reclamo
+        </a>
+        <a class="sidebar-item" routerLink="/evento-adverso" routerLinkActive="active">
+          <i class="bi bi-exclamation-triangle me-2"></i> Eventos Adversos
+        </a>
+      </div>
+    </div>
+
+    <!-- Grupo 7: Configuración -->
+    <div class="sidebar-group">
+      <div class="group-header" (click)="toggleGroup('config')">
+        <i class="bi bi-sliders me-2"></i> Configuración
+        <i class="bi bi-chevron-{{groups['config'] ? 'down' : 'right'}} float-end"></i>
+      </div>
+      <div class="group-items" [class.show]="groups['config']">
+        <a class="sidebar-item" routerLink="/tipoarea" routerLinkActive="active">
+          <i class="bi bi-grid me-2"></i> Tipos de Área
+        </a>
+        <a class="sidebar-item" routerLink="/tipodocumento" routerLinkActive="active">
+          <i class="bi bi-file-earmark me-2"></i> Tipos de Documento
+        </a>
+        <a class="sidebar-item" routerLink="/jornada-dia" routerLinkActive="active">
+          <i class="bi bi-calendar-day me-2"></i> Jornadas por Día
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">{{ isEdit ? 'Editar' : 'Nueva' }} Factura</h3>
+    </div>
+    
+    <div class="card-body">
+      <form (ngSubmit)="guardar()">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">ID Paciente</label>
+            <input type="number" [(ngModel)]="factura.id_paciente" 
+                   name="id_paciente" class="form-control" required min="1">
+          </div>
+          
+          <div class="col-md-6">
+            <label class="form-label">Fecha Emisión</label>
+            <input type="datetime-local" [(ngModel)]="factura.fecha_hora_emision" 
+                   name="fecha_hora_emision" class="form-control" required>
+          </div>
+          
+          <div class="col-md-4">
+            <label class="form-label">Método de Pago</label>
+            <select [(ngModel)]="factura.metodo_pago" name="metodo_pago" class="form-select" required>
+              <option *ngFor="let metodo of metodosPago" [value]="metodo">{{ metodo | titlecase }}</option>
+            </select>
+          </div>
+          
+          <div class="col-md-4">
+            <label class="form-label">Estado</label>
+            <select [(ngModel)]="factura.estado" name="estado" class="form-select" required>
+              <option *ngFor="let e of estados" [value]="e">{{ e | replaceUnderscore }}</option>
+            </select>
+          </div>
+          
+          <div class="col-md-4">
+            <label class="form-label">Total</label>
+            <div class="input-group">
+              <span class="input-group-text">$</span>
+              <input type="number" [(ngModel)]="factura.total" 
+                     name="total" class="form-control" required min="0" step="0.01">
+            </div>
+          </div>
+          
+          <div class="col-md-6">
+            <label class="form-label">ID Tipo</label>
+            <input type="number" [(ngModel)]="factura.id_tipo" 
+                   name="id_tipo" class="form-control" required min="1">
+          </div>
+          
+          <div class="col-md-6">
+            <label class="form-label">ID Concepto</label>
+            <input type="number" [(ngModel)]="factura.id_concepto" 
+                   name="id_concepto" class="form-control" required min="1">
+          </div>
+        </div>
+
+        <div class="mt-4 d-flex justify-content-end gap-2">
+          <button type="button" (click)="cancelar()" 
+                  class="btn btn-secondary">
+            <i class="bi bi-x-circle me-2"></i>Cancelar
+          </button>
+          <button type="submit" class="btn btn-primary">
+            <i class="bi bi-save me-2"></i>{{ isEdit ? 'Actualizar' : 'Guardar' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

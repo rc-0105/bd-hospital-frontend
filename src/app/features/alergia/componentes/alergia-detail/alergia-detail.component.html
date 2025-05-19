@@ -1,0 +1,35 @@
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">Detalle de Alergia</h3>
+    </div>
+    
+    <div class="card-body" *ngIf="alergia">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <strong>ID:</strong> {{ alergia.id_al }}
+            </li>
+            <li class="list-group-item">
+              <strong>ID Historia Clínica:</strong> {{ alergia.id_historia }}
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-12">
+          <h5>Descripción</h5>
+          <div class="card card-body bg-light">
+            {{ alergia.descripcion }}
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-4 d-flex justify-content-end">
+        <a routerLink="/alergia" class="btn btn-outline-primary">
+          <i class="bi bi-arrow-left me-2"></i>Volver al Listado
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

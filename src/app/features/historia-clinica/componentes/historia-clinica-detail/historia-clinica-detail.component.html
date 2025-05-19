@@ -1,0 +1,38 @@
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">Detalle de Historia Clínica</h3>
+    </div>
+    
+    <div class="card-body" *ngIf="historia">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <strong>ID Historia:</strong> {{ historia.id_historia }}
+            </li>
+            <li class="list-group-item">
+              <strong>ID Paciente:</strong> {{ historia.id_paciente }}
+            </li>
+            <li class="list-group-item">
+              <strong>Fecha Creación:</strong> {{ historia.fecha_hora_creacion | date:'medium' }}
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-12">
+          <h5>Observaciones</h5>
+          <div class="card card-body bg-light pre-formatted">
+            {{ historia.observaciones }}
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-4 d-flex justify-content-end">
+        <a routerLink="/historia-clinica" class="btn btn-outline-primary">
+          <i class="bi bi-arrow-left me-2"></i>Volver al Listado
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

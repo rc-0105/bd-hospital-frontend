@@ -1,0 +1,75 @@
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+      <h3 class="mb-0">Registro de Antecedentes</h3>
+      <a routerLink="nuevo" class="btn btn-light">
+        <i class="bi bi-plus-circle me-2"></i>Nuevo Antecedente
+      </a>
+    </div>
+
+    <div class="card-body">
+      <div class="row mb-4 g-3">
+        <div class="col-md-4">
+          <label class="form-label">Filtrar por tipo:</label>
+          <select [(ngModel)]="tipoFiltro" class="form-select">
+            <option value="">Todos</option>
+            <option *ngFor="let tipo of tipos" [value]="tipo">{{ tipo | titlecase }}</option>
+          </select>
+        </div>
+        
+        <div class="col-md-4">
+          <label class="form-label">Buscar por ID Historia:</label>
+          <div class="input-group">
+            <input type="number" [(ngModel)]="idHistoriaBusqueda" 
+                   class="form-control" placeholder="ID Historia">
+            <button (click)="buscarPorHistoria()" class="btn btn-outline-primary">
+              <i class="bi bi-search"></i>
+            </button>
+          </div>
+        </div>
+        
+        <div class="col-md-4 d-flex align-items-end">
+          <button (click)="loadAntecedentes()" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-clockwise me-1"></i>Restablecer
+          </button>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover table-striped">
+          <thead class="table-dark">
+            <tr>
+              <th>Tipo</th>
+              <th>Descripción</th>
+              <th>ID Historia</th>
+              <th class="text-end">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let a of aplicarFiltros()">
+              <td>{{ a.tipo | titlecase }}</td>
+              <td>{{ a.descripcion | truncate:30 }}</td>
+              <td>{{ a.id_historia }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/antecedente/editar', a.id_af]" 
+                     class="btn btn-sm btn-warning">
+                    <i class="bi bi-pencil-square"></i>
+                  </a>
+                  <a [routerLink]="['/antecedente', a.id_af]" 
+                     class="btn btn-sm btn-info">
+                    <i class="bi bi-eye"></i>
+                  </a>
+                  <button (click)="eliminarAntecedente(a.id_af)" 
+                          class="btn btn-sm btn-danger">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,86 @@
+/* sidebar.component.css */
+.sidebar {
+  width: 280px;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  background: #2c3e50;
+  color: white;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  overflow-y: auto;
+}
+
+.sidebar.active {
+  transform: translateX(0);
+}
+
+.sidebar-header {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidebar-content {
+  padding: 1rem 0;
+}
+
+.sidebar-group {
+  margin-bottom: 0.5rem;
+}
+
+.group-header {
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.2s;
+}
+
+.group-header:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+
+.group-items {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.group-items.show {
+  max-height: 1000px; /* Ajusta según necesidad */
+}
+
+.sidebar-item {
+  display: block;
+  padding: 0.5rem 1.5rem 0.5rem 2.5rem;
+  color: rgba(255,255,255,0.8);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.sidebar-item:hover {
+  background-color: rgba(255,255,255,0.1);
+  color: white;
+}
+
+.sidebar-item.active {
+  background-color: #3498db;
+  color: white;
+}
+
+.bi-chevron-right, .bi-chevron-down {
+  transition: transform 0.3s ease;
+}
+
+/* Responsivo */
+@media (max-width: 992px) {
+  .sidebar {
+    width: 280px;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+  }
+}

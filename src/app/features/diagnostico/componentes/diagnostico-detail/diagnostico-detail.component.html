@@ -1,0 +1,42 @@
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">Detalle del Diagnóstico</h3>
+    </div>
+    
+    <div class="card-body" *ngIf="diagnostico">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <strong>ID:</strong> {{ diagnostico.id_diagnostico }}
+            </li>
+            <li class="list-group-item">
+              <strong>ID Paciente:</strong> {{ diagnostico.id_paciente }}
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-12">
+          <h5>Diagnóstico de Ingreso</h5>
+          <div class="card card-body bg-light mb-3">
+            {{ diagnostico.diagnostico_ingreso }}
+          </div>
+        </div>
+
+        <div class="col-12" *ngIf="diagnostico.diagnostico_egreso">
+          <h5>Diagnóstico de Egreso</h5>
+          <div class="card card-body bg-light">
+            {{ diagnostico.diagnostico_egreso }}
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-4 d-flex justify-content-end">
+        <a routerLink="/diagnostico" class="btn btn-outline-primary">
+          <i class="bi bi-arrow-left me-2"></i>Volver al Listado
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

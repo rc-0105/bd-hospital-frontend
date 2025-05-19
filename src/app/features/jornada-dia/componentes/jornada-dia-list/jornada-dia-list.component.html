@@ -1,0 +1,55 @@
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+      <h3 class="mb-0">Jornadas por Día</h3>
+      <a routerLink="nuevo" class="btn btn-light">
+        <i class="bi bi-plus-circle me-2"></i>Nueva Jornada
+      </a>
+    </div>
+
+    <div class="card-body">
+      <div class="row mb-4">
+        <div class="col-md-4">
+          <label class="form-label">Filtrar por día:</label>
+          <div class="input-group">
+            <input type="text" [(ngModel)]="filtroDia" 
+                   class="form-control" placeholder="Ej: Lunes">
+            <button (click)="filtroDia = ''" class="btn btn-outline-secondary">
+              <i class="bi bi-x"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover table-striped">
+          <thead class="table-dark">
+            <tr>
+              <th>ID</th>
+              <th>Día de la Semana</th>
+              <th class="text-end">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let j of filtrarJornadas()">
+              <td>{{ j.id_jornada }}</td>
+              <td>{{ j.dia_semana | titlecase }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/jornada-dia/editar', j.id_jornada]" 
+                     class="btn btn-sm btn-warning">
+                    <i class="bi bi-pencil-square"></i>
+                  </a>
+                  <button (click)="eliminarJornada(j.id_jornada)" 
+                          class="btn btn-sm btn-danger">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

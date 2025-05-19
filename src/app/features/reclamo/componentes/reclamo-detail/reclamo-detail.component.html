@@ -1,0 +1,52 @@
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">Detalle del Reclamo</h3>
+    </div>
+    
+    <div class="card-body" *ngIf="reclamo">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <strong>Fecha/Hora:</strong> {{ reclamo.fecha_hora_reclamo | date:'medium' }}
+            </li>
+            <li class="list-group-item">
+              <strong>Tipo:</strong> {{ reclamo.tipo | titlecase }}
+            </li>
+            <li class="list-group-item">
+              <strong>Área:</strong> {{ reclamo.area_responsable | titlecase }}
+            </li>
+            <li class="list-group-item">
+              <strong>Estado:</strong> 
+              <span class="badge" [ngClass]="{
+                'bg-warning': reclamo.estado === 'PENDIENTE',
+                'bg-info': reclamo.estado === 'EN_PROCESO',
+                'bg-success': reclamo.estado === 'RESUELTO',
+                'bg-danger': reclamo.estado === 'RECHAZADO'
+              }">
+                {{ reclamo.estado | titlecase }}
+              </span>
+            </li>
+            <li class="list-group-item">
+              <strong>ID Paciente:</strong> {{ reclamo.id_paciente }}
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-12">
+          <h5>Descripción</h5>
+          <div class="card card-body bg-light">
+            {{ reclamo.descripcion }}
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-4 d-flex justify-content-end">
+        <a routerLink="/reclamo" class="btn btn-outline-primary">
+          <i class="bi bi-arrow-left me-2"></i>Volver al Listado
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

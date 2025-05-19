@@ -1,0 +1,62 @@
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">{{ isEdit ? 'Editar' : 'Nuevo' }} Reclamo</h3>
+    </div>
+    
+    <div class="card-body">
+      <form (ngSubmit)="guardar()">
+        <div class="row g-3">
+          <div class="col-md-6" *ngIf="isEdit">
+            <label class="form-label">Fecha/Hora</label>
+            <input type="datetime-local" [(ngModel)]="reclamo.fecha_hora_reclamo" 
+                   name="fecha_hora_reclamo" class="form-control" disabled>
+          </div>
+          
+          <div class="col-md-6">
+            <label class="form-label">Tipo</label>
+            <select [(ngModel)]="reclamo.tipo" name="tipo" class="form-select" required>
+              <option *ngFor="let tipo of tipos" [value]="tipo">{{ tipo | titlecase }}</option>
+            </select>
+          </div>
+          
+          <div class="col-md-6">
+            <label class="form-label">Área Responsable</label>
+            <select [(ngModel)]="reclamo.area_responsable" name="area_responsable" class="form-select" required>
+              <option *ngFor="let area of areas" [value]="area">{{ area | titlecase }}</option>
+            </select>
+          </div>
+          
+          <div class="col-md-6">
+            <label class="form-label">Estado</label>
+            <select [(ngModel)]="reclamo.estado" name="estado" class="form-select" required>
+              <option *ngFor="let estado of estados" [value]="estado">{{ estado | titlecase }}</option>
+            </select>
+          </div>
+          
+          <div class="col-md-6">
+            <label class="form-label">ID Paciente</label>
+            <input type="number" [(ngModel)]="reclamo.id_paciente" 
+                   name="id_paciente" class="form-control" required min="1">
+          </div>
+          
+          <div class="col-12">
+            <label class="form-label">Descripción</label>
+            <textarea [(ngModel)]="reclamo.descripcion" 
+                     name="descripcion" class="form-control" rows="4" required></textarea>
+          </div>
+        </div>
+
+        <div class="mt-4 d-flex justify-content-end gap-2">
+          <button type="button" (click)="cancelar()" 
+                  class="btn btn-secondary">
+            <i class="bi bi-x-circle me-2"></i>Cancelar
+          </button>
+          <button type="submit" class="btn btn-primary">
+            <i class="bi bi-save me-2"></i>{{ isEdit ? 'Actualizar' : 'Guardar' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

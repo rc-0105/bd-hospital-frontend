@@ -1,0 +1,65 @@
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+      <h3 class="mb-0">Historias Clínicas</h3>
+      <a routerLink="nuevo" class="btn btn-light">
+        <i class="bi bi-plus-circle me-2"></i>Nueva Historia
+      </a>
+    </div>
+
+    <div class="card-body">
+      <div class="row mb-4">
+        <div class="col-md-4">
+          <div class="input-group">
+            <input type="number" [(ngModel)]="idPacienteBusqueda" 
+                   class="form-control" placeholder="ID Paciente">
+            <button (click)="buscarPorPaciente()" class="btn btn-outline-primary">
+              <i class="bi bi-search"></i>
+            </button>
+            <button (click)="loadHistorias()" class="btn btn-outline-secondary">
+              <i class="bi bi-arrow-clockwise"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover table-striped">
+          <thead class="table-dark">
+            <tr>
+              <th>ID</th>
+              <th>ID Paciente</th>
+              <th>Fecha Creación</th>
+              <th>Observaciones</th>
+              <th class="text-end">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let h of historias">
+              <td>{{ h.id_historia }}</td>
+              <td>{{ h.id_paciente }}</td>
+              <td>{{ h.fecha_hora_creacion | date:'dd/MM/yyyy HH:mm' }}</td>
+              <td>{{ h.observaciones | truncate:30 }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/historia-clinica/editar', h.id_historia]" 
+                     class="btn btn-sm btn-warning">
+                    <i class="bi bi-pencil-square"></i>
+                  </a>
+                  <a [routerLink]="['/historia-clinica', h.id_historia]" 
+                     class="btn btn-sm btn-info">
+                    <i class="bi bi-eye"></i>
+                  </a>
+                  <button (click)="eliminarHistoria(h.id_historia)" 
+                          class="btn btn-sm btn-danger">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

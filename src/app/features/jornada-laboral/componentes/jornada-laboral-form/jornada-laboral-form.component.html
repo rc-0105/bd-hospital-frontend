@@ -1,0 +1,51 @@
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">{{ isEdit ? 'Editar' : 'Nueva' }} Jornada Laboral</h3>
+    </div>
+    
+    <div class="card-body">
+      <form (ngSubmit)="guardar()">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Fecha y Hora de Inicio</label>
+            <input type="datetime-local" [(ngModel)]="jornada.fecha_hora_inicio" 
+                   name="fecha_hora_inicio" class="form-control" required>
+          </div>
+          
+          <div class="col-md-6">
+            <label class="form-label">ID Empleado</label>
+            <input type="number" [(ngModel)]="jornada.id_empleado" 
+                   name="id_empleado" class="form-control" required min="1">
+          </div>
+          
+          <div class="col-12">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" 
+                     [(ngModel)]="mostrarCierre" name="mostrarCierre" (change)="toggleCierre()">
+              <label class="form-check-label" for="flexSwitchCheckChecked">
+                {{ mostrarCierre ? 'Jornada cerrada' : 'Jornada en curso' }}
+              </label>
+            </div>
+          </div>
+          
+          <div class="col-md-6" *ngIf="mostrarCierre">
+            <label class="form-label">Fecha y Hora de Cierre</label>
+            <input type="datetime-local" [(ngModel)]="jornada.fecha_hora_cierre" 
+                   name="fecha_hora_cierre" class="form-control">
+          </div>
+        </div>
+
+        <div class="mt-4 d-flex justify-content-end gap-2">
+          <button type="button" (click)="cancelar()" 
+                  class="btn btn-secondary">
+            <i class="bi bi-x-circle me-2"></i>Cancelar
+          </button>
+          <button type="submit" class="btn btn-primary">
+            <i class="bi bi-save me-2"></i>{{ isEdit ? 'Actualizar' : 'Guardar' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

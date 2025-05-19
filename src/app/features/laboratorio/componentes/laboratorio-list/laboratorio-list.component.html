@@ -1,0 +1,87 @@
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+      <h3 class="mb-0">Exámenes de Laboratorio</h3>
+      <a routerLink="nuevo" class="btn btn-light">
+        <i class="bi bi-plus-circle me-2"></i>Nuevo Examen
+      </a>
+    </div>
+
+    <div class="card-body">
+      <div class="row mb-4 g-3">
+        <div class="col-md-3">
+          <label class="form-label">Filtrar por tipo:</label>
+          <select [(ngModel)]="filtroTipo" class="form-select">
+            <option value="">Todos</option>
+            <option *ngFor="let tipo of tiposExamen" [value]="tipo">{{ tipo | titlecase }}</option>
+          </select>
+        </div>
+        
+        <div class="col-md-3">
+          <label class="form-label">Filtrar por resultado:</label>
+          <input type="text" [(ngModel)]="filtroResultado" class="form-control" placeholder="Ej: normal">
+        </div>
+        
+        <div class="col-md-4">
+          <label class="form-label">Buscar por ID Consulta:</label>
+          <div class="input-group">
+            <input type="number" [(ngModel)]="idConsultaBusqueda" 
+                   class="form-control" placeholder="ID Consulta">
+            <button (click)="buscarPorConsulta()" class="btn btn-outline-primary">
+              <i class="bi bi-search"></i>
+            </button>
+          </div>
+        </div>
+        
+        <div class="col-md-2 d-flex align-items-end">
+          <button (click)="filtroTipo = ''; filtroResultado = ''; idConsultaBusqueda = undefined; cargarExamenes()" 
+                  class="btn btn-outline-secondary w-100">
+            <i class="bi bi-arrow-clockwise me-1"></i>Limpiar
+          </button>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover table-striped">
+          <thead class="table-dark">
+            <tr>
+              <th>Tipo Examen</th>
+              <th>Fecha Solicitud</th>
+              <th>Resultado</th>
+              <th>ID Consulta</th>
+              <th class="text-end">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let e of aplicarFiltros()">
+              <td>{{ e.tipo_examen | titlecase }}</td>
+              <td>{{ e.fecha_hora_solicitud | date:'short' }}</td>
+              <td>
+                <span [class]="'badge bg-' + getResultadoClass(e.resultado)" [title]="e.resultado">
+                  {{ e.resultado | truncate:20 }}
+                </span>
+              </td>
+              <td>{{ e.id_consulta }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/laboratorio/editar', e.id_laboratorio]" 
+                     class="btn btn-sm btn-warning">
+                    <i class="bi bi-pencil-square"></i>
+                  </a>
+                  <a [routerLink]="['/laboratorio', e.id_laboratorio]" 
+                     class="btn btn-sm btn-info">
+                    <i class="bi bi-eye"></i>
+                  </a>
+                  <button (click)="eliminarExamen(e.id_laboratorio)" 
+                          class="btn btn-sm btn-danger">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
