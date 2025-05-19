@@ -1,0 +1,66 @@
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">Detalle de la Cirugía</h3>
+    </div>
+    
+    <div class="card-body" *ngIf="cirugia">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="card mb-3">
+            <div class="card-header bg-info text-white">
+              <h5 class="mb-0">Información del Paciente</h5>
+            </div>
+            <div class="card-body">
+              <p><strong>ID:</strong> {{ cirugia.id_paciente }}</p>
+              <p><strong>Nombre:</strong> {{ cirugia.nombre_paciente }} {{ cirugia.apellido_paciente }}</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="card mb-3">
+            <div class="card-header bg-info text-white">
+              <h5 class="mb-0">Información del Médico</h5>
+            </div>
+            <div class="card-body">
+              <p><strong>ID:</strong> {{ cirugia.id_medico }}</p>
+              <p><strong>Nombre:</strong> {{ cirugia.nombre_medico }} {{ cirugia.apellido_medico }}</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <strong>Fecha y Hora:</strong> {{ formatearFecha(cirugia.fecha_hora) }}
+            </li>
+            <li class="list-group-item">
+              <strong>Tipo de Procedimiento:</strong> {{ cirugia.tipo_procedimiento }}
+            </li>
+          </ul>
+        </div>
+        
+        <div class="col-12">
+          <h5>Diagnóstico</h5>
+          <div class="card card-body bg-light">
+            {{ cirugia.diagnostico }}
+          </div>
+        </div>
+        
+        <div class="col-12" *ngIf="cirugia.observaciones">
+          <h5>Observaciones</h5>
+          <div class="card card-body bg-light">
+            {{ cirugia.observaciones }}
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-4 d-flex justify-content-end">
+        <a routerLink="/cirugia" class="btn btn-outline-primary">
+          <i class="bi bi-arrow-left me-2"></i>Volver al Listado
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

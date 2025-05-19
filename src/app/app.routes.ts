@@ -121,4 +121,15 @@ export const routes: Routes = [
     loadChildren: () => import('./features/tipo-reclamo/routes/tipo-reclamo.routes')
       .then(m => m.TIPO_RECLAMO_ROUTES)
   },
+  { 
+    path: 'cita',
+    loadChildren: () => import('./features/cita/routes/cita.routes')
+      .then(m => m.CITA_ROUTES)
+  },
+  {
+    path: 'cirugia',
+    loadChildren: () => import('./features/cirugia/routes/cirugia.routes')
+      .then(m => m.CIRUGIA_ROUTES)
+  },
+  
 ];

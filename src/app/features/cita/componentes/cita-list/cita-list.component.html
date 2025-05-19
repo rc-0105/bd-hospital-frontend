@@ -1,0 +1,88 @@
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+      <h3 class="mb-0">Gestión de Citas</h3>
+      <a routerLink="nueva" class="btn btn-light">
+        <i class="bi bi-plus-circle me-2"></i>Nueva Cita
+      </a>
+    </div>
+
+    <div class="card-body">
+      <div class="row mb-4 g-3">
+        <div class="col-md-3">
+          <label class="form-label">ID Paciente</label>
+          <input type="number" [(ngModel)]="filtros.idPaciente" class="form-control">
+        </div>
+        
+        <div class="col-md-3">
+          <label class="form-label">ID Médico</label>
+          <input type="number" [(ngModel)]="filtros.idMedico" class="form-control">
+        </div>
+        
+        <div class="col-md-3">
+          <label class="form-label">Estado</label>
+          <select [(ngModel)]="filtros.estado" class="form-select">
+            <option value="">Todos</option>
+            <option *ngFor="let estado of estados" [value]="estado">{{ estado }}</option>
+          </select>
+        </div>
+        
+        <div class="col-md-3 d-flex align-items-end gap-2">
+          <button (click)="aplicarFiltros()" class="btn btn-primary">
+            <i class="bi bi-funnel me-1"></i>Filtrar
+          </button>
+          <button (click)="limpiarFiltros()" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-clockwise"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover table-striped">
+          <thead class="table-dark">
+            <tr>
+              <th>Paciente</th>
+              <th>Médico</th>
+              <th>Fecha/Hora</th>
+              <th>Estado</th>
+              <th class="text-end">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let c of citas">
+              <td>{{ c.nombre_paciente }} {{ c.apellido_paciente }}</td>
+              <td>{{ c.nombre_medico }} {{ c.apellido_medico }}</td>
+              <td>{{ formatearFecha(c.fecha_hora_cita) }}</td>
+              <td>
+                <span [ngClass]="{
+                  'badge bg-warning': c.estado === 'PENDIENTE',
+                  'badge bg-success': c.estado === 'CONFIRMADA',
+                  'badge bg-secondary': c.estado === 'COMPLETADA',
+                  'badge bg-danger': c.estado === 'CANCELADA'
+                }">
+                  {{ c.estado }}
+                </span>
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/cita/editar', c.id_cita]" 
+                     class="btn btn-sm btn-warning">
+                    <i class="bi bi-pencil-square"></i>
+                  </a>
+                  <a [routerLink]="['/cita', c.id_cita]" 
+                     class="btn btn-sm btn-info">
+                    <i class="bi bi-eye"></i>
+                  </a>
+                  <button (click)="eliminarCita(c.id_cita)" 
+                          class="btn btn-sm btn-danger">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

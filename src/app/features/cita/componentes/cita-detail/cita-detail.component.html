@@ -1,0 +1,60 @@
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">Detalle de la Cita</h3>
+    </div>
+    
+    <div class="card-body" *ngIf="cita">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="card mb-3">
+            <div class="card-header bg-info text-white">
+              <h5 class="mb-0">Información del Paciente</h5>
+            </div>
+            <div class="card-body">
+              <p><strong>ID:</strong> {{ cita.id_paciente }}</p>
+              <p><strong>Nombre:</strong> {{ cita.nombre_paciente }} {{ cita.apellido_paciente }}</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="card mb-3">
+            <div class="card-header bg-info text-white">
+              <h5 class="mb-0">Información del Médico</h5>
+            </div>
+            <div class="card-body">
+              <p><strong>ID:</strong> {{ cita.id_medico }}</p>
+              <p><strong>Nombre:</strong> {{ cita.nombre_medico }} {{ cita.apellido_medico }}</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <strong>Fecha y Hora:</strong> {{ formatearFecha(cita.fecha_hora_cita) }}
+            </li>
+            <li class="list-group-item">
+              <strong>Estado:</strong> 
+              <span [ngClass]="{
+                'badge bg-warning': cita.estado === 'PENDIENTE',
+                'badge bg-success': cita.estado === 'CONFIRMADA',
+                'badge bg-secondary': cita.estado === 'COMPLETADA',
+                'badge bg-danger': cita.estado === 'CANCELADA'
+              }">
+                {{ cita.estado }}
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-4 d-flex justify-content-end">
+        <a routerLink="/cita" class="btn btn-outline-primary">
+          <i class="bi bi-arrow-left me-2"></i>Volver al Listado
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
