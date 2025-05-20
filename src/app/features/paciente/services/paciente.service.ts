@@ -1,18 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
 import { Paciente } from '../models/paciente.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PacienteService {
-  private apiUrl = 'http://localhost:8080/paciente';
+  private apiUrl = 'http://localhost:8484/paciente';
+  private pacientesSubject = new BehaviorSubject<Paciente[]>([]);
+  pacientes$ = this.pacientesSubject.asObservable();
 
   constructor(private http: HttpClient) { }
 
   obtenerTodos(): Observable<Paciente[]> {
-    return this.http.get<Paciente[]>(this.apiUrl);
+    return this.http.get<Paciente[]>(this.apiUrl).pipe(
+      tap(pacientes => this.pacientesSubject.next(pacientes))
+    );
   }
 
   obtenerPorId(id: number): Observable<Paciente> {

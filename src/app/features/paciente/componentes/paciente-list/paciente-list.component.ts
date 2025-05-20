@@ -21,7 +21,13 @@ export class PacienteListComponent implements OnInit {
   constructor(private pacienteService: PacienteService) {}
 
   ngOnInit(): void {
-    this.loadPacientes();
+    this.pacienteService.pacientes$.subscribe(pacientes => {
+      this.pacientes = pacientes;
+    });
+    
+    if (!this.pacientes.length) {
+      this.loadPacientes();
+    }
   }
 
   loadPacientes() {

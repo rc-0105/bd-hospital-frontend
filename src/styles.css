@@ -50,3 +50,78 @@
     box-shadow: 2px 0 10px rgba(0,0,0,0.1);
   }
 }
+
+
+/* styles.css */
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+}
+
+.cdk-overlay-pane {
+  max-width: 90vw;
+  width: 600px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+/* Estilos generales para los modales */
+.mat-dialog-container {
+  padding: 0 !important;
+  border-radius: 8px !important;
+}
+
+/* Estilos para los badges */
+.badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  color: white;
+}
+
+.badge.masculino {
+  background-color: #3f51b5;
+}
+
+.badge.femenino {
+  background-color: #f44336;
+}
+
+/* Estilos para el listado */
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.text-end {
+  text-align: end;
+}
+
+.w-100 {
+  width: 100%;
+  margin-bottom: 16px;
+}
