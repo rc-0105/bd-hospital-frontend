@@ -1,59 +1,48 @@
-# BdHospitalManagment
+# Sistema Médico · gestión hospitalaria
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.6.
+Frontend en Angular para la gestión integral de un hospital: 26 módulos CRUD
+(pacientes, médicos, historias clínicas, citas, cirugías, facturación, seguros,
+reclamos y más), organizados en un sidebar por área. Proyecto de la asignatura
+de Bases de Datos.
 
-## Development server
+## Stack
 
-To start a local development server, run:
+- Angular 19 (standalone components, SSR con hidratación, lazy loading por módulo)
+- Angular Material + Bootstrap 5
+- Interfaz con estilo minimalista inspirado en Notion: navbar y sidebar claros,
+  tablas y tarjetas con bordes y sombras suaves, acento azul consistente
 
-```bash
-ng serve
-```
+## Módulos
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+| Área | Entidades |
+| --- | --- |
+| Gestión médica | Pacientes, Médicos, Historias Clínicas, Diagnósticos, Antecedentes, Alergias |
+| Servicios clínicos | Citas, Cirugías, Laboratorio, Prescripciones, Equipo Médico, Habitaciones |
+| Administración | Empleados, Jornadas Laborales, Programas |
+| Facturación | Facturas, Tipos de Factura, Conceptos |
+| Seguros | Seguros de Salud, Pólizas |
+| Reclamos | Reclamos, Tipos de Reclamo, Eventos Adversos |
+| Configuración | Tipos de Área, Tipos de Documento, Jornadas por Día |
 
-## Code scaffolding
+## Cómo ejecutarlo
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Requisitos: Node 18+ y una API REST compatible corriendo en `http://localhost:8080`
+(cada módulo expone su propio recurso, p. ej. `/paciente`, `/medico`, `/cita`).
 
 ```bash
-ng test
+npm install
+npm start
 ```
 
-## Running end-to-end tests
+Queda disponible en `http://localhost:4200` (no hay una ruta raíz definida;
+entrá directamente a un módulo, por ejemplo `http://localhost:4200/pacientes`).
 
-For end-to-end (e2e) testing, run:
+## Build de producción
 
 ```bash
-ng e2e
+npm run build
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Las rutas con parámetro (`/editar/:id`) se renderizan en el cliente
+(`RenderMode.Client`), ya que los datos vienen de la API en tiempo real y no
+tiene sentido prerenderizarlas.
