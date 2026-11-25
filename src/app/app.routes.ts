@@ -1,7 +1,12 @@
 import { Routes } from '@angular/router';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 export const routes: Routes = [
-  { 
+  {
+    path: '',
+    component: DashboardComponent
+  },
+  {
     path: 'pacientes',
     loadChildren: () => import('./features/paciente/routes/paciente.routes')
       .then(m => m.PACIENTE_ROUTES)

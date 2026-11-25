@@ -1,0 +1,33 @@
+<div class="dashboard">
+  <header class="dashboard-header">
+    <h1>Sistema Médico</h1>
+    <p class="dashboard-subtitle">Panel de gestión hospitalaria</p>
+  </header>
+
+  <section class="stats-row">
+    <div class="stat-card" *ngFor="let stat of stats">
+      <i class="bi {{ stat.icon }} stat-icon"></i>
+      <div class="stat-value">{{ stat.value === null ? '—' : stat.value }}</div>
+      <div class="stat-label">{{ stat.label }}</div>
+    </div>
+  </section>
+
+  <section class="groups-grid">
+    <div class="group-card" *ngFor="let group of groups">
+      <div class="group-card-header">
+        <i class="bi {{ group.icon }}"></i>
+        <h2>{{ group.label }}</h2>
+      </div>
+      <div class="group-links">
+        <a
+          *ngFor="let item of group.items"
+          [routerLink]="item.path"
+          class="group-link"
+        >
+          <i class="bi {{ item.icon }}"></i>
+          {{ item.label }}
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
