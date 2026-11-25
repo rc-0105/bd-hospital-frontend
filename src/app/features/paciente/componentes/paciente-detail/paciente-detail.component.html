@@ -1,56 +1,102 @@
-<div class="container mt-4">
-  <div class="card shadow">
-    <div class="card-header bg-primary text-white">
-      <h3 class="mb-0">Detalle del Paciente</h3>
+<div class="container mt-4 mb-5" *ngIf="paciente">
+  <div class="perfil-header">
+    <div class="perfil-avatar">{{ paciente.nombre.charAt(0) }}{{ paciente.apellido.charAt(0) }}</div>
+    <div class="perfil-identidad">
+      <h2 class="mb-1">{{ paciente.nombre }} {{ paciente.apellido }}</h2>
+      <div class="perfil-chips">
+        <span class="chip" *ngIf="edad !== null">{{ edad }} años</span>
+        <span class="chip">{{ paciente.sexo === 'M' ? 'Masculino' : 'Femenino' }}</span>
+        <span class="chip" *ngIf="paciente.tipo_documento">{{ paciente.tipo_documento }}</span>
+        <span class="chip" *ngIf="paciente.telefono">
+          <i class="bi bi-telephone"></i> {{ paciente.telefono }}
+        </span>
+        <span class="chip" *ngIf="paciente.direccion">
+          <i class="bi bi-geo-alt"></i> {{ paciente.direccion }}
+        </span>
+        <span class="chip" *ngIf="paciente.id_seguro">
+          <i class="bi bi-shield-check"></i> Seguro #{{ paciente.id_seguro }}
+        </span>
+      </div>
     </div>
-    
-    <div class="card-body" *ngIf="paciente">
-      <div class="row g-3">
-        <div class="col-md-6">
-          <h5>Información Básica</h5>
-          <ul class="list-group">
-            <li class="list-group-item">
-              <strong>Nombre:</strong> {{ paciente.nombre }}
-            </li>
-            <li class="list-group-item">
-              <strong>Apellido:</strong> {{ paciente.apellido }}
-            </li>
-            <li class="list-group-item">
-              <strong>Fecha Nacimiento:</strong> {{ paciente.fecha_nacimiento | date:'dd/MM/yyyy' }}
-            </li>
-            <li class="list-group-item">
-              <strong>Sexo:</strong> 
-              <span class="badge" [ngClass]="{
-                'bg-primary': paciente.sexo === 'M',
-                'bg-danger': paciente.sexo === 'F'
-              }">
-                {{ paciente.sexo === 'M' ? 'Masculino' : 'Femenino' }}
-              </span>
-            </li>
-          </ul>
-        </div>
+    <a routerLink="/pacientes" class="btn btn-outline-secondary btn-sm ms-auto">
+      <i class="bi bi-arrow-left me-1"></i>Volver
+    </a>
+  </div>
 
-        <div class="col-md-6">
-          <h5>Información Adicional</h5>
-          <ul class="list-group">
-            <li class="list-group-item">
-              <strong>Dirección:</strong> {{ paciente.direccion || 'N/A' }}
-            </li>
-            <li class="list-group-item">
-              <strong>Teléfono:</strong> {{ paciente.telefono || 'N/A' }}
-            </li>
-            <li class="list-group-item">
-              <strong>ID Seguro:</strong> {{ paciente.id_seguro || 'N/A' }}
-            </li>
-          </ul>
+  <div class="alergia-banner" *ngIf="alergias.length">
+    <i class="bi bi-exclamation-triangle-fill"></i>
+    <div>
+      <strong>Alergias registradas:</strong>
+      {{ alergias.length }} —
+      <span *ngFor="let a of alergias; let last = last">{{ a.descripcion }}{{ last ? '' : ', ' }}</span>
+    </div>
+  </div>
+
+  <div class="perfil-grid">
+    <div class="card perfil-card">
+      <div class="card-header bg-primary text-white">
+        <i class="bi bi-clipboard2-pulse me-2"></i>Historias Clínicas
+      </div>
+      <div class="card-body">
+        <p class="text-muted mb-0" *ngIf="!cargandoClinico && !historias.length">Sin historias clínicas registradas.</p>
+        <div class="timeline-item" *ngFor="let h of historias">
+          <div class="timeline-fecha">{{ h.fecha_hora_creacion | date:'dd/MM/yyyy HH:mm' }}</div>
+          <div>{{ h.observaciones || 'Sin observaciones' }}</div>
         </div>
       </div>
+    </div>
 
-      <div class="mt-4 d-flex justify-content-end">
-        <a routerLink="/pacientes" class="btn btn-outline-primary">
-          <i class="bi bi-arrow-left me-2"></i>Volver al Listado
-        </a>
+    <div class="card perfil-card">
+      <div class="card-header bg-primary text-white">
+        <i class="bi bi-file-medical me-2"></i>Diagnósticos
+      </div>
+      <div class="card-body">
+        <p class="text-muted mb-0" *ngIf="!diagnosticos.length">Sin diagnósticos registrados.</p>
+        <div class="timeline-item" *ngFor="let d of diagnosticos">
+          <div><strong>Ingreso:</strong> {{ d.diagnostico_ingreso }}</div>
+          <div><strong>Egreso:</strong> {{ d.diagnostico_egreso || 'Pendiente' }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card perfil-card">
+      <div class="card-header bg-primary text-white">
+        <i class="bi bi-file-text me-2"></i>Antecedentes
+      </div>
+      <div class="card-body">
+        <p class="text-muted mb-0" *ngIf="!cargandoClinico && !antecedentes.length">Sin antecedentes registrados.</p>
+        <div class="timeline-item" *ngFor="let a of antecedentes">
+          <span class="chip chip-sm">{{ a.tipo }}</span>
+          <div>{{ a.descripcion }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card perfil-card">
+      <div class="card-header bg-primary text-white">
+        <i class="bi bi-journal-medical me-2"></i>Citas
+      </div>
+      <div class="card-body">
+        <p class="text-muted mb-0" *ngIf="!citas.length">Sin citas registradas.</p>
+        <div class="timeline-item" *ngFor="let c of citas">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <div class="timeline-fecha">{{ c.fecha_hora_cita | date:'dd/MM/yyyy HH:mm' }}</div>
+              <div>Dr./Dra. {{ c.nombre_medico }} {{ c.apellido_medico }}</div>
+            </div>
+            <span class="badge" [ngClass]="{
+              'bg-warning': c.estado === 'PENDIENTE',
+              'bg-success': c.estado === 'CONFIRMADA',
+              'bg-secondary': c.estado === 'COMPLETADA',
+              'bg-danger': c.estado === 'CANCELADA'
+            }">{{ c.estado }}</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+</div>
+
+<div class="container mt-4" *ngIf="!paciente">
+  <p class="text-muted">Cargando paciente…</p>
 </div>
