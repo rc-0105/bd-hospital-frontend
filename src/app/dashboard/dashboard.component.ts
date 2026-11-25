@@ -17,12 +17,14 @@ interface ModuleLink {
 interface ModuleGroup {
   label: string;
   icon: string;
+  accent: string;
   items: ModuleLink[];
 }
 
 interface Stat {
   label: string;
   icon: string;
+  accent: string;
   value: number | null;
 }
 
@@ -35,16 +37,17 @@ interface Stat {
 })
 export class DashboardComponent implements OnInit {
   stats: Stat[] = [
-    { label: 'Pacientes', icon: 'bi-people-fill', value: null },
-    { label: 'Médicos', icon: 'bi-heart-pulse', value: null },
-    { label: 'Citas', icon: 'bi-journal-medical', value: null },
-    { label: 'Habitaciones', icon: 'bi-door-closed', value: null }
+    { label: 'Pacientes', icon: 'bi-people-fill', accent: '#3366ff', value: null },
+    { label: 'Médicos', icon: 'bi-heart-pulse', accent: '#7c5cff', value: null },
+    { label: 'Citas', icon: 'bi-journal-medical', accent: '#0ea5a0', value: null },
+    { label: 'Habitaciones', icon: 'bi-door-closed', accent: '#f59e0b', value: null }
   ];
 
   groups: ModuleGroup[] = [
     {
       label: 'Gestión Médica',
       icon: 'bi-heart-pulse',
+      accent: '#3366ff',
       items: [
         { label: 'Pacientes', path: '/pacientes', icon: 'bi-people-fill' },
         { label: 'Médicos', path: '/medicos', icon: 'bi-heart-pulse' },
@@ -57,6 +60,7 @@ export class DashboardComponent implements OnInit {
     {
       label: 'Servicios Clínicos',
       icon: 'bi-hospital',
+      accent: '#0ea5a0',
       items: [
         { label: 'Citas', path: '/cita', icon: 'bi-journal-medical' },
         { label: 'Cirugías', path: '/cirugia', icon: 'bi-journal-medical' },
@@ -69,6 +73,7 @@ export class DashboardComponent implements OnInit {
     {
       label: 'Administración',
       icon: 'bi-gear',
+      accent: '#7c5cff',
       items: [
         { label: 'Empleados', path: '/empleados', icon: 'bi-person-badge' },
         { label: 'Jornadas Laborales', path: '/jornada-laboral', icon: 'bi-clock-history' },
@@ -78,6 +83,7 @@ export class DashboardComponent implements OnInit {
     {
       label: 'Facturación',
       icon: 'bi-cash-coin',
+      accent: '#f59e0b',
       items: [
         { label: 'Facturas', path: '/factura', icon: 'bi-receipt' },
         { label: 'Tipos de Factura', path: '/tipo-factura', icon: 'bi-receipt-cutoff' },
@@ -87,6 +93,7 @@ export class DashboardComponent implements OnInit {
     {
       label: 'Seguros',
       icon: 'bi-shield-check',
+      accent: '#06aed4',
       items: [
         { label: 'Seguros de Salud', path: '/seguro-salud', icon: 'bi-shield-plus' },
         { label: 'Pólizas', path: '/poliza', icon: 'bi-file-earmark-text' }
@@ -95,6 +102,7 @@ export class DashboardComponent implements OnInit {
     {
       label: 'Reclamos',
       icon: 'bi-exclamation-octagon',
+      accent: '#e8554a',
       items: [
         { label: 'Reclamos', path: '/reclamo', icon: 'bi-chat-left-text' },
         { label: 'Tipos de Reclamo', path: '/tipo-reclamo', icon: 'bi-tags' },
@@ -104,6 +112,7 @@ export class DashboardComponent implements OnInit {
     {
       label: 'Configuración',
       icon: 'bi-sliders',
+      accent: '#64748b',
       items: [
         { label: 'Tipos de Área', path: '/tipoarea', icon: 'bi-grid' },
         { label: 'Tipos de Documento', path: '/tipodocumento', icon: 'bi-file-earmark' },

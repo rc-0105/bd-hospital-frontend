@@ -5,17 +5,31 @@
   </header>
 
   <section class="stats-row">
-    <div class="stat-card" *ngFor="let stat of stats">
-      <i class="bi {{ stat.icon }} stat-icon"></i>
+    <div
+      class="stat-card"
+      *ngFor="let stat of stats; let i = index"
+      [style.--accent]="stat.accent"
+      [style.animation-delay.ms]="i * 60"
+    >
+      <div class="icon-tile">
+        <i class="bi {{ stat.icon }}"></i>
+      </div>
       <div class="stat-value">{{ stat.value === null ? '—' : stat.value }}</div>
       <div class="stat-label">{{ stat.label }}</div>
     </div>
   </section>
 
   <section class="groups-grid">
-    <div class="group-card" *ngFor="let group of groups">
+    <div
+      class="group-card"
+      *ngFor="let group of groups; let i = index"
+      [style.--accent]="group.accent"
+      [style.animation-delay.ms]="80 + i * 50"
+    >
       <div class="group-card-header">
-        <i class="bi {{ group.icon }}"></i>
+        <div class="icon-tile icon-tile-sm">
+          <i class="bi {{ group.icon }}"></i>
+        </div>
         <h2>{{ group.label }}</h2>
       </div>
       <div class="group-links">
